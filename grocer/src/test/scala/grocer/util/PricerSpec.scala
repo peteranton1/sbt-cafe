@@ -5,12 +5,12 @@ import org.scalatest.{FlatSpec, Matchers}
 
 class PricerSpec extends FlatSpec with Matchers {
 
-  "Pricer.getTotal" should "produce Apple * 3 at 180 pence" in {
+  "Pricer.getTotal" should "produce Apple*3 Orange*1 at 205 pence" in {
     val items = Item.getItems(
       List(
         Item.apple,Item.apple,
-        Item.apple))
-    Pricer.getTotal(items) shouldEqual 180
+        Item.orange,Item.apple))
+    Pricer.getTotal(items) shouldEqual 205
   }
 
   it should "produce Orange * 4 at 100 pence" in {
@@ -31,12 +31,17 @@ class PricerSpec extends FlatSpec with Matchers {
     Pricer.getTotal(items) shouldEqual 280
   }
 
-  "Pricer.getDiscounted" should "produce Apple * 3 at 120 pence" in {
+  it should "produce Apple*0 at 0 pence" in {
+    val items = Item.getItems(List())
+    Pricer.getTotal(items) shouldEqual 0
+  }
+
+  "Pricer.getDiscounted" should "produce Apple*3 Orange*1 at 145 pence" in {
     val items = Item.getItems(
       List(
         Item.apple,Item.apple,
-        Item.apple))
-    Pricer.getDiscounted(items) shouldEqual 120
+        Item.orange,Item.apple))
+    Pricer.getDiscounted(items) shouldEqual 145
   }
 
   it should "produce Orange * 4 at 75 pence" in {
@@ -55,6 +60,11 @@ class PricerSpec extends FlatSpec with Matchers {
         Item.apple,
         Item.orange,Item.orange))
     Pricer.getDiscounted(items) shouldEqual 195
+  }
+
+  it should "produce Apple*0 at 0 pence" in {
+    val items = Item.getItems(List())
+    Pricer.getDiscounted(items) shouldEqual 0
   }
 }
 
