@@ -5,17 +5,20 @@ import java.math.BigDecimal
 object Discounter {
 
   def discountBogof(name: String, items: List[Item]): BigDecimal = {
-    val filtered = items.filter(item => item.name == name)
-    val size = filtered.size
-    val subset = filtered.take(size/2).map(item => item.price)
-    Pricer.sum(subset)
+    val denominator = 2
+    discountInternal(name,items,denominator)
   }
 
   def discount3for2(name: String, items: List[Item]): BigDecimal = {
-    val filtered = items.filter(item => item.name == name)
-    val size = filtered.size
-    val subset = filtered.take((size/3)).map(item => item.price)
-    Pricer.sum(subset)
+    val denominator = 3
+    discountInternal(name,items,denominator)
   }
 
+  private def discountInternal(name: String, items: List[Item],
+                               denominator: Int): BigDecimal = {
+    val filtered = items.filter(item => item.name == name)
+    val size = filtered.size
+    val subset = filtered.take(size/denominator).map(_.price)
+    Pricer.sum(subset)
+  }
 }
