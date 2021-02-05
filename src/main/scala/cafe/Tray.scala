@@ -7,7 +7,7 @@ case class MenuItem(name: String, hotCold: String, foodType: String, price: BigD
 case class Tray(menuItems: List[MenuItem])
 
 object Tray {
-  val emptyItem = MenuItem("Unknown", "Cold", "Drink", BigDecimal.ZERO)
+  val emptyItem: MenuItem = MenuItem("Unknown", "Cold", "Drink", BigDecimal.ZERO)
   val menu: Map[String, MenuItem] = Map(
     "Cola" -> MenuItem("Cola", "Cold", "Drink", new BigDecimal("0.50")),
     "Coffee" -> MenuItem("Coffee", "Hot", "Drink", new BigDecimal("1.00")),
