@@ -17,9 +17,9 @@ object CafePricer {
   def calcTip(menuItems: List[MenuItem]): BigDecimal = {
 
     val total = calcTotal(menuItems)
-    val hasFood = menuItems.count(_.foodType == "Food") > 0
+    val hasFood = menuItems.count(_.foodDrink == Food) > 0
     val hasHotFood = menuItems.count(item =>
-      item.hotCold == "Hot" && item.foodType == "Food") > 0
+      item.hotCold == Hot && item.foodDrink == Food) > 0
 
     if(!hasFood) BigDecimal.ZERO.setScale(2)
     else if(hasHotFood) {
